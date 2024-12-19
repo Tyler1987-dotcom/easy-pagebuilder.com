@@ -34,12 +34,13 @@
     "cross-env": "^7.0.3",
     "file-loader": "^6.2.0"
   },
-  "scripts": {
-    "start": "cross-env DISABLE_HOST_CHECK=true react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
+ "scripts": {
+  "start": "cross-env DISABLE_HOST_CHECK=true react-scripts start",  
+  "build": "react-scripts build",  
+  "test": "react-scripts test",  
+  "eject": "react-scripts eject",  
+  "serve": "serve -s build"  
+},
   "browserslist": {
     "production": [
       ">0.2%",

@@ -5,9 +5,11 @@
     "node": "16.x || 22.x"
   },
   "scripts": {
-    "build": "cd ../client && npm install && npm run build",
-    "dev": "npm run build && nodemon server.cjs",
-    "start": "node server.cjs"
+    "dev": "npm run build && nodemon server.cjs", 
+    "build": "npm run build:client && npm run build:server", 
+    "build:client": "cd client && npm install && npm run build",  
+    "build:server": "echo 'Server build step if needed'",
+    "start": "npm run build && node server.cjs"  
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^3.1.1",
