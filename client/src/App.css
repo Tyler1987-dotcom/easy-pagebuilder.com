@@ -1,0 +1,25 @@
+.button-payment-container {
+    display: flex;
+    flex-direction: column; /* Stack the button and payment form vertically */
+    align-items: center; /* Center the items horizontally */
+    justify-content: center; /* Center them vertically */
+    gap: 20px; /* Space between the payment form and the button */
+    margin-top: 20px; /* Optional: Adds space above the container */
+  }
+  
+  .button-payment-container .back-to-display-btn {
+    background-color: #f39c12;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Make the button take the full width of the container */
+    max-width: 300px; /* Optional: Limit the button's width */
+  }
+  
+  .button-payment-container .payment-form {
+    width: 100%; /* Make PaymentForm take the full width of the container */
+    max-width: 500px; /* Optional: Limit the PaymentForm's width */
+  }
+  

@@ -1,0 +1,120 @@
+/* Container for display pages */
+.display-pages {
+  padding: 20px;
+  text-align: center;
+  background-color: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styling */
+.display-pages h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+/* List container */
+.pages-list {
+  display: flex;
+  flex-direction: column;
+  /* Stack the cards vertically */
+  gap: 20px;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  /* Center the list */
+}
+
+/* Card item styling */
+.page-item {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  /* Center the text */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 250px;
+  /* Ensuring cards have equal height */
+  max-width: 400px;
+  /* Limiting the max width of each card */
+  width: 100%;
+  /* Ensure the card stretches to fit available space */
+  margin: 0 auto;
+  /* Center the cards */
+}
+
+/* Title styling inside each card */
+.page-item h3 {
+  font-size: 1.25rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
+  /* Center title */
+}
+
+/* Content styling inside each card */
+.page-item p {
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-bottom: 20px;
+  line-height: 1.4;
+  text-align: center;
+  /* Center content */
+}
+
+/* Phone number styling */
+.page-phone-number {
+  font-size: 1rem;
+  color: #2980b9;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+  /* Center phone number */
+}
+
+/* Button container */
+.buttons {
+  display: flex;
+  justify-content: center;
+  /* Center buttons */
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+  /* Make buttons stretch to fit the container */
+  max-width: 400px;
+  /* Limit the button container width */
+}
+
+/* Button styles */
+button {
+  padding: 8px 15px; /* Smaller padding for compact size */
+  font-size: 0.875rem; /* Consistent smaller font size */
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.3s ease; /* Add hover animations */
+  width: 100%; 
+  max-width: 120px; /* Limit max width */
+  font-weight: bold; /* Make text bolder for emphasis */
+  background-color: #4CAF50; /* Green background for a fresh look */
+  color: white; /* White text for contrast */
+}
+
+button:hover {
+  background-color: #45a049; /* Slightly darker green on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow for depth */
+}
+
+button:focus {
+  outline: none; /* Remove focus outline */
+  box-shadow: 0 0 0 3px rgba(72, 206, 151, 0.5); /* Focus shadow for accessibility */
+}
+
+
+

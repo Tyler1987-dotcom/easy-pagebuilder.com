@@ -1,0 +1,105 @@
+/* Container for the form */
+form {
+  font-family: 'Arial', sans-serif;
+  background-color: #ffffff;
+  padding: 30px;
+  margin: 20px auto;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form label styling */
+label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+  font-weight: bold;
+}
+
+/* Input fields and textarea styling */
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Placeholder text styling */
+input::placeholder,
+textarea::placeholder {
+  color: #888;
+}
+
+/* Style for the buttons inside the form */
+button {
+  padding: 10px 20px; 
+  font-size: 1rem; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Add smooth hover animations */
+  margin-right: 10px; /* Add space between the buttons */
+  margin-top: 10px; /* Space at the top for better positioning */
+  font-weight: bold; /* Bold text for emphasis */
+}
+
+/* Style for the "Create Page" button */
+button[type="submit"] {
+  background-color: #007f5f; /* Bold green for growth and action */
+  color: #ffffff; /* White text for contrast */
+}
+
+button[type="submit"]:hover {
+  background-color: #005f46; /* Darker green for hover */
+  transform: scale(1.05); /* Slight zoom for interactivity */
+}
+
+/* Style for the "Instructions" button */
+button.instructions-btn {
+  background-color: #ff4500; /* Bold red-orange for urgency and attention */
+  color: #ffffff; /* White text for contrast */
+}
+
+button.instructions-btn:hover {
+  background-color: #d33800; /* Darker red-orange for hover */
+  transform: scale(1.05); /* Slight zoom for interactivity */
+}
+
+/* Style for the "Close" button in the instructions window */
+button[type="button"] {
+  background-color: #1e3a8a; /* Bold navy blue for calmness */
+  color: #ffffff; /* White text for contrast */
+}
+
+button[type="button"]:hover {
+  background-color: #162c6b; /* Darker navy blue for hover */
+  transform: scale(1.05); /* Slight zoom for interactivity */
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 600px) {
+  form {
+    padding: 20px;
+    width: 90%;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  input,
+  textarea,
+  button {
+    font-size: 14px;
+  }
+}
