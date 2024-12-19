@@ -7,7 +7,7 @@
 "scripts": {
   "dev": "npm run build && nodemon server.cjs",
   "build": "npm run build:client && npm run build:server",
-  "build:client": "cd ../client && npm install && npm run build",  // Adjusted path to go up one level to access client
+  "build:client": "cd ../client && npm install && npm run build",
   "build:server": "echo 'Server build step if needed'",
   "start": "npm run build && node server.cjs"
 },
