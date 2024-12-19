@@ -37,7 +37,7 @@
   },
   "scripts": {
     "start": "cross-env DISABLE_HOST_CHECK=true react-scripts start",
-    "build": "npm install && react-scripts build",                      
+    "build": "npm install && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "serve": "serve -s build"
