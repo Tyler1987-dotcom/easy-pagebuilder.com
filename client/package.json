@@ -35,7 +35,7 @@
     "file-loader": "^6.2.0"
   },
   "scripts": {
-    "start": "DISABLE_HOST_CHECK=true react-scripts start",
+    "start": "cross-env DISABLE_HOST_CHECK=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
