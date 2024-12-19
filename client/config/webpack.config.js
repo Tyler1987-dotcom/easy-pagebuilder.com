@@ -5,9 +5,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');  // Import webpack to use DefinePlugin
 
 module.exports = {
-  entry: path.resolve(__dirname, '../src/index.js'),  // Adjusted to point to src from config folder
+  entry: path.resolve(__dirname, 'src/index.js'),  // Adjusted to point to src from config folder
   output: {
-    path: path.resolve(__dirname, '../build'),  // Build output folder at the root level
+    path: path.resolve(__dirname, 'build'),  // Build output folder at the root level
     filename: '[name].[contenthash].js',
   },
   resolve: {
@@ -51,7 +51,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../public/index.html'),  // Adjusted to point to public from config folder
+      template: path.resolve(__dirname, 'public/index.html'),  // Adjusted to point to public from config folder
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
@@ -59,11 +59,11 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY': JSON.stringify(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY),
       'process.env.REACT_APP_API_BASE_URL': JSON.stringify(process.env.REACT_APP_API_BASE_URL),
-    }),  // Inject environment variables into the app
+    }),
   ],
   devtool: 'source-map',
   devServer: {
-    contentBase: path.join(__dirname, '../public'),  // Adjusted to point to public from config folder
+    contentBase: path.join(__dirname, 'public'),
     port: 3000,
     hot: true,
     open: true,
