@@ -19,6 +19,7 @@
     "react-router-dom": "^7.0.2",
     "react-scripts": "^5.0.1",
     "style-loader": "^3.3.1",
+    "web-vitals": "^4.2.4",
     "webpack-manifest-plugin": "^4.0.2"
   },
   "devDependencies": {
@@ -29,22 +30,15 @@
     "@babel/plugin-transform-runtime": "^7.25.9",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
-    "babel-loader": "^9.2.1",
     "clean-webpack-plugin": "^4.0.0",
     "cross-env": "^7.0.3",
-    "css-loader": "^7.1.2",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.6.3",
-    "mini-css-extract-plugin": "^2.9.2",
-    "sass-loader": "^16.0.4",
-    "webpack": "^5.97.1",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^5.2.0"
+    "file-loader": "^6.2.0"
   },
   "scripts": {
-    "start": "cross-env PORT=3001 NODE_OPTIONS=--openssl-legacy-provider node server.js",
-    "build": "webpack --mode production",
-    "test": "node scripts/test.js"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "browserslist": {
     "production": [
@@ -61,5 +55,6 @@
   "engines": {
     "node": ">=16.x <=20.x"
   },
-  "homepage": "https://easy-pagebuilder-com-client.onrender.com"
+  "homepage": "https://easy-pagebuilder-com-client.onrender.com",
+  "proxy": "http://localhost:5000"
 }

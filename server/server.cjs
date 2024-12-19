@@ -29,6 +29,7 @@ const allowedOrigins = [
   'https://easy-pagebuilder-com-client.onrender.com', // Client domain
   'https://easy-pagebuilder-com-server.onrender.com', // Server domain
   'http://localhost:3001', // Local development frontend
+  'http://localhost:3000', // Local development frontend (added for localhost:3000)
 ];
 
 // CORS Middleware
@@ -47,7 +48,6 @@ app.use(cors({
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow custom headers like Authorization and Content-Type
 }));
-
 
 // Helmet for security headers
 app.use(helmet());
