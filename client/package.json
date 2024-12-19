@@ -18,6 +18,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.0.2",
     "react-scripts": "^5.0.1",
+    "serve": "^14.2.4",
     "style-loader": "^3.3.1",
     "web-vitals": "^4.2.4",
     "webpack-manifest-plugin": "^4.0.2"
@@ -34,13 +35,13 @@
     "cross-env": "^7.0.3",
     "file-loader": "^6.2.0"
   },
- "scripts": {
-  "start": "cross-env DISABLE_HOST_CHECK=true react-scripts start",  
-  "build": "react-scripts build",  
-  "test": "react-scripts test",  
-  "eject": "react-scripts eject",  
-  "serve": "serve -s build"  
-},
+  "scripts": {
+    "start": "cross-env DISABLE_HOST_CHECK=true react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "serve": "serve -s build"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
