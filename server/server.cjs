@@ -45,7 +45,9 @@ app.use(cors({
   },
   methods: ['GET', 'POST'],
   credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow custom headers like Authorization and Content-Type
 }));
+
 
 // Helmet for security headers
 app.use(helmet());
