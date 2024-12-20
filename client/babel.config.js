@@ -11,4 +11,4 @@ module.exports = {
     '@babel/plugin-transform-nullish-coalescing-operator', // Transforms nullish coalescing operator (optional, may be covered by preset-env)
     '@babel/plugin-transform-numeric-separator', // Transforms numeric separators (optional, may be covered by preset-env)
   ]
-}
+};
