@@ -24,10 +24,11 @@ const stripe = new Stripe(config.stripeSecretKey);
 // Allowed origins for CORS
 const allowedOrigins = [
   'https://easy-pagebuilder.com', // Production frontend
-  'https://easy-pagebuilder-com-client.onrender.com', // Client domain
-  'https://easy-pagebuilder-com-server.onrender.com', // Server domain
-  'http://localhost:3001', // Local development frontend
-  'http://localhost:3000', // Local development frontend
+  'https://www.easy-pagebuilder.com', // Production frontend (ensure both www and non-www versions are covered)
+  'https://easy-pagebuilder-com-client.onrender.com', // Client domain (Render client)
+  'https://easy-pagebuilder-com-server.onrender.com', // Server domain (Render server)
+  'http://localhost:3000', // Local development frontend (React default port)
+  'http://localhost:3001', // Local development frontend (another possible port for React dev server)
 ];
 
 // CORS Middleware
