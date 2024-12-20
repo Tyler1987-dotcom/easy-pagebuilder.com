@@ -8,6 +8,7 @@ const path = require('path');
 const rateLimit = require('express-rate-limit');
 const config = require('./config/config.js');
 const Page = require('./models/Page.js');
+const fs = require('fs');
 
 const app = express();
 
@@ -22,19 +23,18 @@ const stripe = new Stripe(config.stripeSecretKey);
 
 // Allowed origins for CORS
 const allowedOrigins = [
-  'https://easy-pagebuilder.com', // Advertising domain
-  'https://easy-pagebuilder-com-client.onrender.com', // Frontend on Render
-  'https://easy-pagebuilder-com-server.onrender.com', // Backend on Render
+  'https://easy-pagebuilder.com', // Production frontend
+  'https://easy-pagebuilder-com-client.onrender.com', // Client domain
+  'https://easy-pagebuilder-com-server.onrender.com', // Server domain
   'http://localhost:3001', // Local development frontend
   'http://localhost:3000', // Local development frontend
 ];
-
 
 // CORS Middleware
 app.use(cors({
   origin: function (origin, callback) {
     console.log(`Incoming request from origin: ${origin}`); // Debugging log
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       console.log(`CORS allowed for origin: ${origin}`); // Debugging log for allowed origins
       callback(null, true);
     } else {
@@ -44,7 +44,7 @@ app.use(cors({
   },
   methods: ['GET', 'POST'],
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow custom headers like Authorization and Content-Type
 }));
 
 app.use(helmet());
@@ -52,6 +52,7 @@ app.use(express.json());
 
 // MongoDB connection
 mongoose.connect(config.mongoURI, {
+  ...config.mongoOptions,
   writeConcern: { w: 'majority', j: true, wtimeout: 5000 },
 }).then(() => console.log('Connected to MongoDB'))
   .catch(err => {
@@ -116,10 +117,16 @@ app.post('/create-payment-intent', paymentLimiter, async (req, res) => {
 });
 
 // Serve static files
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+const buildPath = path.join(__dirname, '..', 'client', 'build');
+if (!fs.existsSync(buildPath)) {
+  console.warn(`Warning: Build folder not found at ${buildPath}`);
+}
 
+app.use(express.static(buildPath));
+
+// Serve index.html for all other routes
 app.get('*', (req, res) => {
-  const filePath = path.join(__dirname, 'client', 'build', 'index.html');
+  const filePath = path.join(buildPath, 'index.html');
   res.sendFile(filePath, (err) => {
     if (err) {
       console.error('Error serving index.html:', err);
