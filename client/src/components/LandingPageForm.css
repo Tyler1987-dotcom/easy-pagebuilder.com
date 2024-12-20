@@ -86,6 +86,13 @@ button[type="button"]:hover {
   transform: scale(1.05); /* Slight zoom for interactivity */
 }
 
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+
 /* Responsive layout for smaller screens */
 @media (max-width: 600px) {
   form {

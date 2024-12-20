@@ -36,12 +36,6 @@ const App = () => {
     }
   };
   
-  
-  
-
-  useEffect(() => {
-    fetchPages();
-  }, []);
 
   // Function to create payment intent and get client secret
   const createPaymentIntent = async (pageId) => {
@@ -166,6 +160,10 @@ const App = () => {
     setClientSecret(''); // Clear client secret
   };
 
+  useEffect(() => {
+    fetchPages();
+  }, []);
+
   return (
     <Elements stripe={stripePromise}>
       <div>
@@ -211,3 +209,13 @@ const App = () => {
 };
 
 export default App;
+
+
+
+
+
+
+
+
+
+

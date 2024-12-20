@@ -83,22 +83,28 @@ mongoose.connect(config.mongoURI, config.mongoOptions)
     process.exit(1);
   });
 
-// API Routes
+// Create a new page
 app.post('/api/pages', async (req, res) => {
   try {
     const newPage = new Page(req.body);
     const savedPage = await newPage.save();
     res.status(201).json(savedPage);
   } catch (error) {
+    console.error('Error creating page:', error);
     res.status(400).json({ error: error.message });
   }
 });
 
+// Get all pages
 app.get('/api/pages', async (req, res) => {
   try {
-    const pages = await Page.find().sort({ createdAt: -1 });
+    const pages = await Page.find().sort({ createdAt: -1 }); // Sort by creation date in descending order
+    if (!pages || pages.length === 0) {
+      return res.status(404).json({ message: 'No pages found' });
+    }
     res.status(200).json(pages);
   } catch (error) {
+    console.error('Error fetching pages:', error);
     res.status(500).json({ error: error.message });
   }
 });
