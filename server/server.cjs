@@ -27,9 +27,11 @@ const allowedOrigins = [
   'https://www.easy-pagebuilder.com', // Production frontend (ensure both www and non-www versions are covered)
   'https://easy-pagebuilder-com-client.onrender.com', // Client domain (Render client)
   'https://easy-pagebuilder-com-server.onrender.com', // Server domain (Render server)
+  'https://api.easy-pagebuilder.com', // API subdomain
   'http://localhost:3000', // Local development frontend (React default port)
   'http://localhost:3001', // Local development frontend (another possible port for React dev server)
 ];
+
 
 // CORS Middleware
 app.use(cors({
