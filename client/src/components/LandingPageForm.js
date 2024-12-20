@@ -3,6 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import './LandingPageForm.css';
 import { parsePhoneNumberFromString } from 'libphonenumber-js'; // Import libphonenumber
+import config from './config'; // Import config
 
 const LandingPageForm = ({ onFormSubmit }) => {
   const [title, setTitle] = useState('');
@@ -34,10 +35,10 @@ const LandingPageForm = ({ onFormSubmit }) => {
     setError(''); // Clear previous error if any
 
     try {
-      const data = { title, content, phoneNumber: formattedPhoneNumber, userId };  // Include userId in data
+      const data = { title, content, phoneNumber: formattedPhoneNumber, userId };
       console.log('Sending data:', data);
 
-      await axios.post('/api/pages', data);
+      await axios.post(`${config.apiBaseURL}/api/pages`, data);
       alert('Page created successfully!');
 
       // Reset form fields after successful submission
@@ -47,7 +48,7 @@ const LandingPageForm = ({ onFormSubmit }) => {
       onFormSubmit();
     } catch (error) {
       console.error('Error creating page:', error);
-      alert('Error creating page!');
+      setError('There was an error creating the page. Please try again later.');
     }
   };
 
