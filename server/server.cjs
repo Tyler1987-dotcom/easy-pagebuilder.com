@@ -48,31 +48,29 @@ app.use(cors({
 }));
 
 // Helmet Middleware for security headers
-// Content Security Policy (CSP) configuration
 const cspOptions = {
   directives: {
-    defaultSrc: ["'self'"], // Default source for all content
+    defaultSrc: ["'self'"],
     scriptSrc: [
-      "'self'", // Allow scripts from the same origin
-      "'unsafe-inline'", // Allow inline scripts (needed for some frameworks)
-      "'unsafe-eval'", // Allow eval (needed for some frameworks)
-      'https://js.stripe.com', // Allow Stripe.js
+      "'self'",
+      "'unsafe-inline'",
+      "'unsafe-eval'",
+      'https://js.stripe.com',
     ],
     connectSrc: [
-      "'self'", // Allow connections to the same origin
-      'https://api.stripe.com', // Allow connections to Stripe API
-      'https://easy-pagebuilder.com', // Allow production frontend
-      'https://easy-pagebuilder-com-client.onrender.com', // Allow client domain
-      'https://easy-pagebuilder-com-server.onrender.com', // Allow server domain
+      "'self'",
+      'https://api.stripe.com',
+      'https://easy-pagebuilder.com',
+      'https://easy-pagebuilder-com-client.onrender.com',
+      'https://easy-pagebuilder-com-server.onrender.com',
     ],
-    imgSrc: ["'self'", 'https://www.google-analytics.com'], // Allow images from the same origin and Google Analytics
-    styleSrc: ["'self'", "'unsafe-inline'"], // Allow inline styles (needed for some frameworks)
-    fontSrc: ["'self'"], // Allow fonts from the same origin
-    frameSrc: ["'self'", "https://js.stripe.com"], // Allow Stripe to load in frames
+    imgSrc: ["'self'", 'https://www.google-analytics.com'],
+    styleSrc: ["'self'", "'unsafe-inline'"],
+    fontSrc: ["'self'"],
+    frameSrc: ["'self'", "https://js.stripe.com"],
   },
 };
 
-// Use Helmet to set the CSP
 app.use(helmet.contentSecurityPolicy(cspOptions));
 
 app.use(express.json());
@@ -114,14 +112,13 @@ const paymentLimiter = rateLimit({
 
 app.post('/create-payment-intent', paymentLimiter, async (req, res) => {
   try {
-    const { pageId, amount } = req.body;
+    const { pageId } = req.body;
+
+    // Fixed amount of $5.00
+    const amount = 5.00;
 
     if (!mongoose.Types.ObjectId.isValid(pageId)) {
       return res.status(400).json({ error: 'Invalid page ID' });
-    }
-
-    if (!amount || isNaN(amount) || amount <= 0) {
-      return res.status(400).json({ error: 'Invalid amount' });
     }
 
     const page = await Page.findById(pageId);
@@ -138,7 +135,7 @@ app.post('/create-payment-intent', paymentLimiter, async (req, res) => {
     res.status(200).send({ clientSecret: paymentIntent.client_secret });
   } catch (error) {
     console.error('Error creating payment intent:', error.message); // Log error message
-    res.status(500).send({ error: 'Failed to create payment intent' });
+    res.status(500).send({ error: 'Failed to create payment intent', details: error.message });
   }
 });
 
@@ -164,7 +161,6 @@ app.get('*', (req, res) => {
 // Health-check
 app.get('/health', async (req, res) => {
   try {
-    // Optionally check if MongoDB is connected
     await mongoose.connection.db.admin().ping();
     res.status(200).send('Server is healthy');
   } catch (err) {
