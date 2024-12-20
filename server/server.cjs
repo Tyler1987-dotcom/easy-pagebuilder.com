@@ -4,8 +4,11 @@ const cors = require('cors');
 const helmet = require('helmet');
 const Stripe = require('stripe');
 const path = require('path');
+const dotenv = require('dotenv');
 const config = require('./config/config.js'); // Import the config file
 const Page = require('./models/Page.js'); // Import the Page model
+
+dotenv.config(); // Load environment variables from .env
 
 const app = express();
 
@@ -126,13 +129,13 @@ app.post('/create-payment-intent', async (req, res) => {
   }
 });
 
-// // Serve static files from React's build folder
-// app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+// Serve static files from React's build folder
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
-// // Catch-all handler for any request that doesn't match an API route
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
-// });
+// Catch-all handler for any request that doesn't match an API route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
+});
 
 // Health-check endpoint
 app.get('/health', (req, res) => {

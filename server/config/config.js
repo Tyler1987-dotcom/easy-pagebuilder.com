@@ -18,5 +18,7 @@ module.exports = {
   mongoOptions: {
     retryWrites: true,               // Enable retryWrites for failover handling (recommended for Atlas)
     w: 'majority',                  // Ensure write concern is majority
+    useNewUrlParser: true,           // Ensure compatibility with new MongoDB connection string parser
+    useUnifiedTopology: true,       // Use the new unified topology layer
   },
 };

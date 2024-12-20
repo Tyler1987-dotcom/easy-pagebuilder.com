@@ -23,11 +23,19 @@ const App = () => {
   const fetchPages = async () => {
     try {
       const response = await axios.get(`${config.apiBaseURL}/api/pages`);
-      setPages(response.data.reverse());
+      console.log('Fetched pages:', response.data); // Log the response to check its structure
+  
+      // Check if response.data is an array before calling reverse
+      if (Array.isArray(response.data)) {
+        setPages(response.data.reverse());
+      } else {
+        console.error('Fetched data is not an array:', response.data);
+      }
     } catch (error) {
       console.error('Error fetching pages:', error);
     }
   };
+  
 
   useEffect(() => {
     fetchPages();
