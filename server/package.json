@@ -9,7 +9,7 @@
   "build": "npm run build:client && npm run build:server",
   "build:client": "cd ../client && npm install && npm run build",
   "build:server": "echo 'Server build step if needed'",
-  "start": "npm run build && node server.cjs"
+  "start": "node server.cjs"
 },
   "dependencies": {
     "@stripe/react-stripe-js": "^3.1.1",

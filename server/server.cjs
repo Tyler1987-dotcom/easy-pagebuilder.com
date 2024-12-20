@@ -49,6 +49,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow custom headers like Authorization and Content-Type
 }));
 
+
 // Helmet for security headers
 app.use(helmet());
 
