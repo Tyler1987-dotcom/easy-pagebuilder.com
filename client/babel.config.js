@@ -5,7 +5,7 @@ module.exports = {
   ],
   "plugins": [
     "@babel/plugin-transform-class-properties",
-    "@babel/plugin-transform-private-property-in-object",
+    "@babel/plugin-proposal-private-property-in-object",  // Corrected plugin
     "@babel/plugin-transform-optional-chaining",
     "@babel/plugin-transform-nullish-coalescing-operator",
     '@babel/plugin-proposal-private-methods',
