@@ -48,35 +48,32 @@ app.use(cors({
 }));
 
 // Helmet Middleware for security headers
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:"],
-      connectSrc: ["'self'", "https://api.stripe.com"], // Allow connections to Stripe
-      fontSrc: ["'self'"],
-      objectSrc: ["'none'"],
-      upgradeInsecureRequests: [],
-    },
+// Content Security Policy (CSP) configuration
+const cspOptions = {
+  directives: {
+    defaultSrc: ["'self'"], // Default source for all content
+    scriptSrc: [
+      "'self'", // Allow scripts from the same origin
+      "'unsafe-inline'", // Allow inline scripts (needed for some frameworks)
+      "'unsafe-eval'", // Allow eval (needed for some frameworks)
+      'https://js.stripe.com', // Allow Stripe.js
+    ],
+    connectSrc: [
+      "'self'", // Allow connections to the same origin
+      'https://api.stripe.com', // Allow connections to Stripe API
+      'http://localhost:5000', // Allow connections to your local backend
+      'https://easy-pagebuilder.com', // Allow production frontend
+      'https://easy-pagebuilder-com-client.onrender.com', // Allow client domain
+      'https://easy-pagebuilder-com-server.onrender.com', // Allow server domain
+    ],
+    imgSrc: ["'self'", 'https://www.google-analytics.com'], // Allow images from the same origin and Google Analytics
+    styleSrc: ["'self'", "'unsafe-inline'"], // Allow inline styles (needed for some frameworks)
+    fontSrc: ["'self'"], // Allow fonts from the same origin
   },
-  crossOriginEmbedderPolicy: true, // Enable CORS for embedded content
-  crossOriginOpenerPolicy: true,  // Ensure the browser can't access cross-origin content
-  crossOriginResourcePolicy: {
-    policy: 'same-origin', // Restrict cross-origin resource sharing
-  },
-  expectCt: {
-    maxAge: 86400, // 24 hours
-    enforce: true, // Enforce Expect-CT header
-  },
-  frameguard: { action: 'deny' }, // Prevent embedding the site in a frame
-  hidePoweredBy: true, // Hide the "X-Powered-By" header
-  hsts: { maxAge: 31536000, includeSubDomains: true, preload: true }, // HTTP Strict Transport Security
-  noSniff: true, // Prevent MIME sniffing
-  referrerPolicy: { policy: 'strict-origin-when-cross-origin' }, // Referrer policy
-  xssFilter: true, // Enable XSS filtering
-}));
+};
+
+// Use Helmet to set the CSP
+app.use(helmet.contentSecurityPolicy(cspOptions));
 
 app.use(express.json());
 
