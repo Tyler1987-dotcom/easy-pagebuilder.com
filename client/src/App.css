@@ -16,6 +16,7 @@
     cursor: pointer;
     width: 100%; /* Make the button take the full width of the container */
     max-width: 300px; /* Optional: Limit the button's width */
+    margin-bottom: 50px;
   }
   
   .button-payment-container .payment-form {
