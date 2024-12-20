@@ -71,5 +71,5 @@
     "node": ">=16.x <=22.x"
   },
   "homepage": "https://easy-pagebuilder-com-client.onrender.com",
-  "proxy": "http://localhost:5000"
+  "proxy": "https://easy-pagebuilder-com-server.onrender.com"
 }
