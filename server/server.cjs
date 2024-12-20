@@ -12,6 +12,14 @@ const fs = require('fs');
 
 const app = express();
 
+// Force HTTPS Redirect
+app.use((req, res, next) => {
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect(301, 'https://' + req.headers.host + req.url);
+  }
+  next();
+});
+
 // Validate environment variables
 if (!config.stripeSecretKey || !config.mongoURI) {
   console.error('Missing required environment variables.');
@@ -31,7 +39,6 @@ const allowedOrigins = [
   'http://localhost:3000', // Local development frontend (React default port)
   'http://localhost:3001', // Local development frontend (another possible port for React dev server)
 ];
-
 
 // CORS Middleware
 app.use(cors({
