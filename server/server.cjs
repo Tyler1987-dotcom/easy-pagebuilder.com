@@ -1,4 +1,4 @@
-require('dotenv').config(); // Load environment variables
+require('dotenv').config(); // Load environment variables at the top
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -47,7 +47,37 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow custom headers like Authorization and Content-Type
 }));
 
-app.use(helmet());
+// Helmet Middleware for security headers
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:"],
+      connectSrc: ["'self'", "https://api.stripe.com"], // Allow connections to Stripe
+      fontSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
+    },
+  },
+  crossOriginEmbedderPolicy: true, // Enable CORS for embedded content
+  crossOriginOpenerPolicy: true,  // Ensure the browser can't access cross-origin content
+  crossOriginResourcePolicy: {
+    policy: 'same-origin', // Restrict cross-origin resource sharing
+  },
+  expectCt: {
+    maxAge: 86400, // 24 hours
+    enforce: true, // Enforce Expect-CT header
+  },
+  frameguard: { action: 'deny' }, // Prevent embedding the site in a frame
+  hidePoweredBy: true, // Hide the "X-Powered-By" header
+  hsts: { maxAge: 31536000, includeSubDomains: true, preload: true }, // HTTP Strict Transport Security
+  noSniff: true, // Prevent MIME sniffing
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' }, // Referrer policy
+  xssFilter: true, // Enable XSS filtering
+}));
+
 app.use(express.json());
 
 // MongoDB connection
@@ -82,8 +112,8 @@ app.get('/api/pages', async (req, res) => {
 
 // Rate limiting for payment endpoint
 const paymentLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
   message: 'Too many requests, please try again later.',
 });
 
@@ -105,13 +135,14 @@ app.post('/create-payment-intent', paymentLimiter, async (req, res) => {
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount * 100,
+      amount: amount * 100, // Amount in cents
       currency: 'usd',
       payment_method_types: ['card'],
     });
 
     res.status(200).send({ clientSecret: paymentIntent.client_secret });
   } catch (error) {
+    console.error('Error creating payment intent:', error);
     res.status(500).send({ error: 'Failed to create payment intent' });
   }
 });
