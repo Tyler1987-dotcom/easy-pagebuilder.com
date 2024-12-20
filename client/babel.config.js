@@ -4,11 +4,11 @@ module.exports = {
     "@babel/preset-react"
   ],
   "plugins": [
-    "@babel/plugin-transform-class-properties",
-    "@babel/plugin-proposal-private-property-in-object",  // Corrected plugin
-    "@babel/plugin-transform-optional-chaining",
-    "@babel/plugin-transform-nullish-coalescing-operator",
-    '@babel/plugin-proposal-private-methods',
+    "@babel/plugin-transform-class-properties", // Updated plugin
+    "@babel/plugin-transform-private-property-in-object", // Updated plugin
+    "@babel/plugin-transform-optional-chaining", // Updated plugin
+    "@babel/plugin-transform-nullish-coalescing-operator", // Updated plugin
+    "@babel/plugin-transform-private-methods", // Updated plugin
     "@babel/plugin-transform-numeric-separator"
   ]
 }
