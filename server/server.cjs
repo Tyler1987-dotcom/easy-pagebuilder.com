@@ -75,14 +75,11 @@ const cspOptions = {
 // Use Helmet to set the CSP
 app.use(helmet.contentSecurityPolicy(cspOptions));
 
-
 app.use(express.json());
 
 // MongoDB connection
-mongoose.connect(config.mongoURI, {
-  ...config.mongoOptions,
-  writeConcern: { w: 'majority', j: true, wtimeout: 5000 },
-}).then(() => console.log('Connected to MongoDB'))
+mongoose.connect(config.mongoURI, config.mongoOptions)
+  .then(() => console.log('Connected to MongoDB'))
   .catch(err => {
     console.error('MongoDB connection error:', err);
     process.exit(1);
@@ -140,7 +137,7 @@ app.post('/create-payment-intent', paymentLimiter, async (req, res) => {
 
     res.status(200).send({ clientSecret: paymentIntent.client_secret });
   } catch (error) {
-    console.error('Error creating payment intent:', error);
+    console.error('Error creating payment intent:', error.message); // Log error message
     res.status(500).send({ error: 'Failed to create payment intent' });
   }
 });
@@ -165,7 +162,16 @@ app.get('*', (req, res) => {
 });
 
 // Health-check
-app.get('/health', (req, res) => res.status(200).send('Server is healthy'));
+app.get('/health', async (req, res) => {
+  try {
+    // Optionally check if MongoDB is connected
+    await mongoose.connection.db.admin().ping();
+    res.status(200).send('Server is healthy');
+  } catch (err) {
+    console.error('Health check failed:', err);
+    res.status(500).send('Server is unhealthy');
+  }
+});
 
 // Error handling
 app.use((err, req, res, next) => {
