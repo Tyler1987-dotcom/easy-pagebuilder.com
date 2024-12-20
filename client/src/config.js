@@ -1,6 +1,6 @@
 const config = {
   stripePublishableKey: process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY, // Stripe key from .env
-  apiBaseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000', // Fallback to Render backend URL in production
+  apiBaseURL: process.env.REACT_APP_API_BASE_URL || 'https://easy-pagebuilder-com-server.onrender.com', // Fallback to Render backend URL in production
 };
 
 // Check if the Stripe Publishable Key is missing

@@ -61,7 +61,6 @@ const cspOptions = {
     connectSrc: [
       "'self'", // Allow connections to the same origin
       'https://api.stripe.com', // Allow connections to Stripe API
-      'http://localhost:5000', // Allow connections to your local backend
       'https://easy-pagebuilder.com', // Allow production frontend
       'https://easy-pagebuilder-com-client.onrender.com', // Allow client domain
       'https://easy-pagebuilder-com-server.onrender.com', // Allow server domain
@@ -69,11 +68,13 @@ const cspOptions = {
     imgSrc: ["'self'", 'https://www.google-analytics.com'], // Allow images from the same origin and Google Analytics
     styleSrc: ["'self'", "'unsafe-inline'"], // Allow inline styles (needed for some frameworks)
     fontSrc: ["'self'"], // Allow fonts from the same origin
+    frameSrc: ["'self'", "https://js.stripe.com"], // Allow Stripe to load in frames
   },
 };
 
 // Use Helmet to set the CSP
 app.use(helmet.contentSecurityPolicy(cspOptions));
+
 
 app.use(express.json());
 
