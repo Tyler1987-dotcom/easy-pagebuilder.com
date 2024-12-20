@@ -11,6 +11,8 @@ const LandingPageForm = ({ onFormSubmit }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [userId] = useState('12345'); // Static or dynamic userId
   const [error, setError] = useState(''); // To store validation errors
+  const [pageCreated, setPageCreated] = useState(false); // To track page creation
+  const [createdPageContent, setCreatedPageContent] = useState(''); // To store the created page content
 
   // Function to validate phone number using libphonenumber
   const validatePhoneNumber = (number) => {
@@ -38,8 +40,14 @@ const LandingPageForm = ({ onFormSubmit }) => {
       const data = { title, content, phoneNumber: formattedPhoneNumber, userId };
       console.log('Sending data:', data);
 
-      await axios.post(`${config.apiBaseURL}/api/pages`, data);
-      alert('Page created successfully!');
+      // Send data to backend to create the page
+      const response = await axios.post(`${config.apiBaseURL}/api/pages`, data);
+      
+      // Assuming the response contains the page content or a URL to the created page
+      const createdPage = response.data; // Adjust according to your API response
+
+      setCreatedPageContent(createdPage); // Store the created page content
+      setPageCreated(true); // Mark the page as created
 
       // Reset form fields after successful submission
       setTitle('');
@@ -108,45 +116,55 @@ const LandingPageForm = ({ onFormSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Enter Business Title:</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Enter Description of Business:</label>
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        ></textarea>
-      </div>
-      <div>
-        <label>Enter Business Phone Number:</label>
-        <input
-          type="text"
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-          placeholder="Enter phone number"
-        />
-      </div>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Enter Business Title:</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Enter Description of Business:</label>
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+          ></textarea>
+        </div>
+        <div>
+          <label>Enter Business Phone Number:</label>
+          <input
+            type="text"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            placeholder="Enter phone number"
+          />
+        </div>
 
-      {/* Display error message if phone number is invalid */}
-      {error && <div className="error-message">{error}</div>}
+        {/* Display error message if phone number is invalid */}
+        {error && <div className="error-message">{error}</div>}
 
-      {/* Form Submit Button */}
-      <button type="submit">Create Page</button>
+        {/* Form Submit Button */}
+        <button type="submit">Create Page</button>
 
-      {/* Instructions Button to open in a new window */}
-      <button type="button" onClick={openInstructionsWindow} className="instructions-btn">
-        Instructions
-      </button>
-    </form>
+        {/* Instructions Button to open in a new window */}
+        <button type="button" onClick={openInstructionsWindow} className="instructions-btn">
+          Instructions
+        </button>
+      </form>
+
+      {/* Display the created page immediately after submission */}
+      {pageCreated && (
+        <div>
+          <h2>Created Page</h2>
+          <div>{createdPageContent}</div> {/* Render the content of the created page */}
+        </div>
+      )}
+    </div>
   );
 };
 
