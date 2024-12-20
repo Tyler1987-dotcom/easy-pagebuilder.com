@@ -41,18 +41,24 @@ const PaymentForm = ({ clientSecret, onPaymentSuccess, setPaymentProcessing, pay
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: '400px', margin: '0 auto', padding: '20px' }}>
+    <form
+      onSubmit={handleSubmit}
+      style={{ maxWidth: '400px', margin: '0 auto', padding: '20px' }}
+      aria-busy={paymentProcessing} // Indicates that the form is busy
+      // Apply inert if payment is processing (uncomment if you want to disable interactions)
+      // inert={paymentProcessing ? 'true' : 'false'}
+    >
       <h2>Complete Your Payment of $5.00 USD</h2>
       <CardElement style={{ marginBottom: '20px' }} />
-      <button 
-        type="submit" 
+      <button
+        type="submit"
         disabled={paymentProcessing || succeeded}
         style={{
-          backgroundColor: '#4CAF50', 
-          color: 'white', 
-          padding: '10px 20px', 
-          border: 'none', 
-          borderRadius: '5px', 
+          backgroundColor: '#4CAF50',
+          color: 'white',
+          padding: '10px 20px',
+          border: 'none',
+          borderRadius: '5px',
           cursor: 'pointer',
           width: '100%',
         }}
