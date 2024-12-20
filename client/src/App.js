@@ -25,9 +25,9 @@ const App = () => {
       const response = await axios.get(`${config.apiBaseURL}/api/pages`);
       console.log('Fetched pages:', response.data); // Log the response to check its structure
   
-      // Check if response.data is an array before calling reverse
+      // Ensure response.data is an array before setting state
       if (Array.isArray(response.data)) {
-        setPages(response.data.reverse());
+        setPages(response.data); // No need to reverse as the backend already sorts it
       } else {
         console.error('Fetched data is not an array:', response.data);
       }
@@ -35,6 +35,8 @@ const App = () => {
       console.error('Error fetching pages:', error);
     }
   };
+  
+  
   
 
   useEffect(() => {

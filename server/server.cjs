@@ -88,7 +88,7 @@ app.post('/api/pages', async (req, res) => {
 
 app.get('/api/pages', async (req, res) => {
   try {
-    const pages = await Page.find();
+    const pages = await Page.find().sort({ createdAt: -1 }); // Most recent first
     console.log('Pages fetched:', pages);
     res.status(200).json(pages);
   } catch (error) {
@@ -96,6 +96,7 @@ app.get('/api/pages', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 // Endpoint to create a payment intent
 app.post('/create-payment-intent', async (req, res) => {
