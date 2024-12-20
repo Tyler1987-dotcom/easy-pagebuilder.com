@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import './LandingPageForm.css';
 import { parsePhoneNumberFromString } from 'libphonenumber-js'; // Import libphonenumber
-import config from './config'; // Import config
+import config from '../config'; // Import config
 
 const LandingPageForm = ({ onFormSubmit }) => {
   const [title, setTitle] = useState('');
