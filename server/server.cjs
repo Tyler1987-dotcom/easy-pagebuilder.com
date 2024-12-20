@@ -126,13 +126,13 @@ app.post('/create-payment-intent', async (req, res) => {
   }
 });
 
-// // Serve static files from React's build folder
-// app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+// Serve static files from React's build folder
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
-// // Catch-all handler for any request that doesn't match an API route
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
-// });
+// Catch-all handler for any request that doesn't match an API route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
+});
 
 // Health-check endpoint
 app.get('/health', (req, res) => {
