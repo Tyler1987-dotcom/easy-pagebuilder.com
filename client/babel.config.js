@@ -9,6 +9,6 @@ module.exports = {
     "@babel/plugin-transform-class-properties", // Updated plugin
     "@babel/plugin-transform-optional-chaining", // Updated plugin
     "@babel/plugin-transform-nullish-coalescing-operator", // Updated plugin
-    "@babel/plugin-transform-numeric-separator"
+    "@babel/plugin-transform-numeric-separator" // Updated plugin
   ]
 }
