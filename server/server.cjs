@@ -36,7 +36,7 @@ const allowedOrigins = [
 app.use(cors({
   origin: function (origin, callback) {
     console.log(`Incoming request from origin: ${origin}`); // Debugging log
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       console.log(`CORS allowed for origin: ${origin}`); // Debugging log for allowed origins
       callback(null, true);
     } else {
@@ -48,8 +48,6 @@ app.use(cors({
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow custom headers like Authorization and Content-Type
 }));
-
-
 
 // Helmet for security headers
 app.use(helmet());
@@ -129,12 +127,12 @@ app.post('/create-payment-intent', async (req, res) => {
 });
 
 // Serve static files from React's build folder
-// app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
 // Catch-all handler for any request that doesn't match an API route
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
+});
 
 // Health-check endpoint
 app.get('/health', (req, res) => {
