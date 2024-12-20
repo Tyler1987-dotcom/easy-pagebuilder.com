@@ -2,21 +2,22 @@
   "name": "server",
   "version": "1.0.0",
   "engines": {
-  "node": ">=16.x <=22.x"
-},
-"scripts": {
-  "dev": "npm run build && nodemon server.cjs",
-  "build": "npm run build:client && npm run build:server",
-  "build:client": "cd ../client && npm install && npm run build",
-  "build:server": "echo 'Server build step if needed'",
-  "start": "node server.cjs"
-},
+    "node": ">=16.x <=22.x"
+  },
+  "scripts": {
+    "dev": "npm run build && nodemon server.cjs",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cd ../client && npm install && npm run build",
+    "build:server": "echo 'Server build step if needed'",
+    "start": "node server.cjs"
+  },
   "dependencies": {
     "@stripe/react-stripe-js": "^3.1.1",
     "@stripe/stripe-js": "^5.3.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
     "express-validator": "7.2.0",
     "helmet": "^8.0.0",
     "jszip": "3.10.1",
