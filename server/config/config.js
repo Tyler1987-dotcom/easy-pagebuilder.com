@@ -17,8 +17,11 @@ module.exports = {
   stripeSecretKey: process.env.STRIPE_SECRET_KEY,
   mongoOptions: {
     retryWrites: true,               // Enable retryWrites for failover handling (recommended for Atlas)
-    w: 'majority',                  // Ensure write concern is majority
+    w: 'majority',                  // Ensure write concern is majority for data consistency
     useNewUrlParser: true,           // Ensure compatibility with new MongoDB connection string parser
     useUnifiedTopology: true,       // Use the new unified topology layer
-  },
+    readPreference: 'nearest',      // Read from the nearest available node (for low-latency reads)
+    readConcernLevel: 'majority',   // Ensure read consistency with majority of nodes
+  }
 };
+
