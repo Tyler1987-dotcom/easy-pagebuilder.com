@@ -42,32 +42,36 @@ const PaymentForm = ({ clientSecret, onPaymentSuccess, setPaymentProcessing, pay
 
   return (
     <form
-      onSubmit={handleSubmit}
-      style={{ maxWidth: '400px', margin: '0 auto', padding: '20px' }}
-      aria-busy={paymentProcessing} // Indicates that the form is busy
-      // Apply inert if payment is processing (uncomment if you want to disable interactions)
-      // inert={paymentProcessing ? 'true' : 'false'}
-    >
-      <h2>Complete Your Payment of $5.00 USD</h2>
-      <CardElement style={{ marginBottom: '20px' }} />
-      <button
-        type="submit"
-        disabled={paymentProcessing || succeeded}
-        style={{
-          backgroundColor: '#4CAF50',
-          color: 'white',
-          padding: '10px 20px',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          width: '100%',
-        }}
-      >
-        {paymentProcessing ? 'Processing...' : succeeded ? 'Payment Succeeded' : 'Pay Now'}
-      </button>
-      {error && <div style={{ color: 'red', marginTop: '10px', fontSize: '14px' }}>{error}</div>}
-      {succeeded && <div style={{ color: 'green', marginTop: '10px', fontSize: '14px' }}>Thank you! Your payment was successful.</div>}
-    </form>
+  onSubmit={handleSubmit}
+  style={{
+    maxWidth: '400px',
+    margin: '0 auto',
+    padding: '20px',
+    textAlign: 'center', // Center-align content within the form
+  }}
+  aria-busy={paymentProcessing}
+>
+  <h2>Complete Your Payment of $5.00 USD</h2>
+  <CardElement style={{ marginBottom: '20px' }} />
+  <button
+    type="submit"
+    disabled={paymentProcessing || succeeded}
+    style={{
+      backgroundColor: '#4CAF50',
+      color: 'white',
+      padding: '10px 20px',
+      border: 'none',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      display: 'inline-block', // Ensure the button is treated as inline for centering
+    }}
+  >
+    {paymentProcessing ? 'Processing...' : succeeded ? 'Payment Succeeded' : 'Pay Now'}
+  </button>
+  {error && <div style={{ color: 'red', marginTop: '10px', fontSize: '14px' }}>{error}</div>}
+  {succeeded && <div style={{ color: 'green', marginTop: '10px', fontSize: '14px' }}>Thank you! Your payment was successful.</div>}
+</form>
+
   );
 };
 
